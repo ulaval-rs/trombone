@@ -10,6 +10,8 @@ import org.voyanttools.trombone.util.TestHelper;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.Assert.fail;
+
 
 public class DocumentFOGIndexTest {
 
@@ -20,14 +22,30 @@ public class DocumentFOGIndexTest {
     private static final double EXPECTED_EN_FOG_INDEX = 11.036356849570737;
 
     @Test
-    public void test() throws IOException {
+    public void testWithEnglishTexts() throws IOException {
         for (Storage storage : TestHelper.getDefaultTestStorages()) {
             System.out.println("Testing with "+storage.getClass().getSimpleName()+": "+storage.getLuceneManager().getClass().getSimpleName());
 
             testWithGivenParameters(storage, new FlexibleParameters(new String[]{"string="+FOGIndexTest.TEXT_EN}), FOGIndexTest.EXPECTED_FOG_INDEX_EN);
-            testWithGivenParameters(storage, new FlexibleParameters(new String[]{"string="+FOGIndexTest.TEXT_FR}), FOGIndexTest.EXPECTED_FOG_INDEX_FR);
             testWithGivenParameters(storage, new FlexibleParameters(new String[]{"file="+TestHelper.getResource(FILE_PATH_EN)}), EXPECTED_EN_FOG_INDEX);
-            testWithGivenParameters(storage, new FlexibleParameters(new String[]{"file="+TestHelper.getResource(FILE_PATH_FR)}), EXPECTED_FR_FOG_INDEX);
+        }
+    }
+
+
+    @Test
+    public void testWithNonEnglishTexts() throws IOException {
+        for (Storage storage : TestHelper.getDefaultTestStorages()) {
+            System.out.println("Testing with "+storage.getClass().getSimpleName()+": "+storage.getLuceneManager().getClass().getSimpleName());
+
+            try {
+                testWithGivenParameters(storage, new FlexibleParameters(new String[]{"string=" + FOGIndexTest.TEXT_FR}), FOGIndexTest.EXPECTED_FOG_INDEX_FR);
+                fail("Expected exception was not thrown.");
+            } catch (RuntimeException ignored) {}
+
+            try {
+                testWithGivenParameters(storage, new FlexibleParameters(new String[]{"file="+TestHelper.getResource(FILE_PATH_FR)}), EXPECTED_FR_FOG_INDEX);
+                fail("Expected exception was not thrown.");
+            } catch (RuntimeException ignored) {}
         }
     }
 
