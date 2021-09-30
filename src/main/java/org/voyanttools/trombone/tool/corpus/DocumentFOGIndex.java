@@ -3,6 +3,7 @@ package org.voyanttools.trombone.tool.corpus;
 import org.voyanttools.trombone.lucene.CorpusMapper;
 import org.voyanttools.trombone.model.Corpus;
 import org.voyanttools.trombone.model.FOGIndex;
+import org.voyanttools.trombone.model.IndexedDocument;
 import org.voyanttools.trombone.storage.Storage;
 import org.voyanttools.trombone.util.FlexibleParameters;
 
@@ -25,8 +26,14 @@ public class DocumentFOGIndex extends AbstractCorpusTool {
         Corpus corpus = corpusMapper.getCorpus();
 
         for (String documentId : corpus.getDocumentIds()) {
+            IndexedDocument indexedDocument = corpus.getDocument(documentId);
             int documentIndex = corpus.getDocumentPosition(documentId);
-            String text = corpus.getDocument(documentId).getDocumentString();
+
+            if (!indexedDocument.getMetadata().getLanguageCode().equalsIgnoreCase("En")) {
+                throw new RuntimeException("Document must be in English in order to run the Gunning FOG readability test ");
+            }
+
+            String text = indexedDocument.getDocumentString();
 
             fogIndexes.add(new FOGIndex(documentIndex, documentId, text));
         }
