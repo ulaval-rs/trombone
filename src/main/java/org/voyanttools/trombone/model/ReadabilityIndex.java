@@ -9,7 +9,7 @@ public abstract class ReadabilityIndex implements Serializable {
 
     protected int docIndex;
     protected String docId;
-    protected String title;
+    protected String location;
 
     protected TextParser text;
 
@@ -18,7 +18,7 @@ public abstract class ReadabilityIndex implements Serializable {
 
         docIndex = indexedDocument.getMetadata().getIndex();
         docId = indexedDocument.getId();
-        title = indexedDocument.getMetadata().getTitle();
+        location = indexedDocument.getMetadata().getLocation();
     }
 
     abstract protected double calculateIndex(TextParser text) throws IOException;

@@ -1,7 +1,6 @@
 package org.voyanttools.trombone.model;
 
 import org.junit.Test;
-import org.voyanttools.trombone.lucene.CorpusMapper;
 import org.voyanttools.trombone.storage.Storage;
 import org.voyanttools.trombone.storage.memory.MemoryStorage;
 import org.voyanttools.trombone.tool.corpus.CorpusCreator;
