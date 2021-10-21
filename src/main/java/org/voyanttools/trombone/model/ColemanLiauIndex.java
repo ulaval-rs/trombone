@@ -1,13 +1,16 @@
 package org.voyanttools.trombone.model;
 
 import org.voyanttools.trombone.tool.util.TextParser;
+import ucar.ma2.Index;
+
+import java.io.IOException;
 
 public class ColemanLiauIndex extends ReadabilityIndex {
 
     protected double colemanLiauIndex;
 
-    public ColemanLiauIndex(int documentIndex, String documentId, String textToParse) {
-        super(documentIndex, documentId, textToParse);
+    public ColemanLiauIndex(IndexedDocument indexedDocument) throws IOException {
+        super(indexedDocument);
 
         colemanLiauIndex = calculateIndex(text);
     }

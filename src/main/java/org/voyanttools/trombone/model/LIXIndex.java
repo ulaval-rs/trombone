@@ -2,12 +2,14 @@ package org.voyanttools.trombone.model;
 
 import org.voyanttools.trombone.tool.util.TextParser;
 
+import java.io.IOException;
+
 public class LIXIndex extends ReadabilityIndex {
 
     protected double lixIndex;
 
-    public LIXIndex(int documentIndex, String documentId, String textToParse) {
-        super(documentIndex, documentId, textToParse);
+    public LIXIndex(IndexedDocument indexedDocument) throws IOException {
+        super(indexedDocument);
 
         lixIndex = calculateIndex(text);
     }

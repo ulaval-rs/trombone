@@ -2,12 +2,14 @@ package org.voyanttools.trombone.model;
 
 import org.voyanttools.trombone.tool.util.TextParser;
 
+import java.io.IOException;
+
 public class SMOGIndex extends ReadabilityIndex {
 
     protected double smogIndex;
 
-    public SMOGIndex(int documentIndex, String documentId, String textToParse) {
-        super(documentIndex, documentId, textToParse);
+    public SMOGIndex(IndexedDocument indexedDocument) throws IOException {
+        super(indexedDocument);
 
         smogIndex = calculateIndex(text);
     }

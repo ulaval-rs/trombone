@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.voyanttools.trombone.lucene.CorpusMapper;
 import org.voyanttools.trombone.model.Corpus;
 import org.voyanttools.trombone.model.DaleChallIndex;
+import org.voyanttools.trombone.model.IndexedDocument;
 import org.voyanttools.trombone.storage.Storage;
 import org.voyanttools.trombone.util.FlexibleParameters;
 
@@ -62,10 +63,9 @@ public class DocumentDaleChallIndex extends AbstractCorpusTool {
         Corpus corpus = corpusMapper.getCorpus();
 
         for (String documentId : corpus.getDocumentIds()) {
-            int documentIndex = corpus.getDocumentPosition(documentId);
-            String text = corpus.getDocument(documentId).getDocumentString();
+            IndexedDocument indexedDocument = corpus.getDocument(documentId);
 
-            daleChallIndexes.add(new DaleChallIndex(documentIndex, documentId, text, easyWords));
+            daleChallIndexes.add(new DaleChallIndex(indexedDocument, easyWords));
         }
     }
 

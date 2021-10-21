@@ -2,12 +2,14 @@ package org.voyanttools.trombone.model;
 
 import org.voyanttools.trombone.tool.util.TextParser;
 
+import java.io.IOException;
+
 public class FOGIndex extends ReadabilityIndex {
 
     protected double fogIndex;
 
-    public FOGIndex(int documentIndex, String documentId, String textToParse) {
-        super(documentIndex, documentId, textToParse);
+    public FOGIndex(IndexedDocument indexedDocument) throws IOException {
+        super(indexedDocument);
 
         fogIndex = calculateIndex(text);
     }

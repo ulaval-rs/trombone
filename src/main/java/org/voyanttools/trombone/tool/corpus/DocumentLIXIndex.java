@@ -2,6 +2,7 @@ package org.voyanttools.trombone.tool.corpus;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.voyanttools.trombone.lucene.CorpusMapper;
+import org.voyanttools.trombone.model.IndexedDocument;
 import org.voyanttools.trombone.model.LIXIndex;
 import org.voyanttools.trombone.model.Corpus;
 import org.voyanttools.trombone.storage.Storage;
@@ -27,10 +28,9 @@ public class DocumentLIXIndex extends AbstractCorpusTool {
         Corpus corpus = corpusMapper.getCorpus();
 
         for (String documentId : corpus.getDocumentIds()) {
-            int documentIndex = corpus.getDocumentPosition(documentId);
-            String text = corpus.getDocument(documentId).getDocumentString();
+            IndexedDocument indexedDocument = corpus.getDocument(documentId);
 
-            lixIndexes.add(new LIXIndex(documentIndex, documentId, text));
+            lixIndexes.add(new LIXIndex(indexedDocument));
         }
     }
 

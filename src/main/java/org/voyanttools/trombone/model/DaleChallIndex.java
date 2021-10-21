@@ -17,8 +17,8 @@ public class DaleChallIndex extends ReadabilityIndex {
     protected int difficultWordsCount = 0;
     protected int easyWordsCount = 0;
 
-    public DaleChallIndex(int documentIndex, String documentId, String textToParse, List<String> easyWords) throws IOException {
-        super(documentIndex, documentId, textToParse);
+    public DaleChallIndex(IndexedDocument indexedDocument, List<String> easyWords) throws IOException {
+        super(indexedDocument);
 
         this.easyWords = easyWords;
 

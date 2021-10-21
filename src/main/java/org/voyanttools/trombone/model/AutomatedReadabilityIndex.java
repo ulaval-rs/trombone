@@ -2,12 +2,14 @@ package org.voyanttools.trombone.model;
 
 import org.voyanttools.trombone.tool.util.TextParser;
 
+import java.io.IOException;
+
 public class AutomatedReadabilityIndex extends ReadabilityIndex {
 
     protected double automatedReadabilityIndex;
 
-    public AutomatedReadabilityIndex(int documentIndex, String documentId, String textToParse) {
-        super(documentIndex, documentId, textToParse);
+    public AutomatedReadabilityIndex(IndexedDocument indexedDocument) throws IOException {
+        super(indexedDocument);
 
         automatedReadabilityIndex = calculateIndex(text);
     }
